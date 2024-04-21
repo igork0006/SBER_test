@@ -43,22 +43,27 @@ resource "sbercloud_cce_cluster" "cce_01" {
   subnet_id              = sbercloud_vpc_subnet.subnet_01.id
 }
 
-# Create CCE worker node(s)
-resource "sbercloud_cce_node" "cce_01_node" {
-  cluster_id        = sbercloud_cce_cluster.cce_01.id
-  name              = "cce-worker"
-  flavor_id         = "s6.large.2"
-  availability_zone = "ru-moscow-1a"
-  os                = "CentOS 7.6"
-  key_pair          = "put_here_the_name_of_your_existing_key_pair"
-
-  root_volume {
-    size       = 50
-    volumetype = "SAS"
-  }
-
-  data_volumes {
-    size       = 100
-    volumetype = "SAS"
-  }
+resource "sbercloud_compute_keypair" "test-keypair" {
+  name     = "my-keypair"
+  key_file = "private_key.pem"
 }
+
+# Create CCE worker node(s)
+# resource "sbercloud_cce_node" "cce_01_node" {
+#   cluster_id        = sbercloud_cce_cluster.cce_01.id
+#   name              = "cce-worker"
+#   flavor_id         = "s6.large.2"
+#   availability_zone = "ru-moscow-1a"
+#   os                = "CentOS 7.6"
+#   key_pair          = "my-keypair"
+
+#   root_volume {
+#     size       = 40
+#     volumetype = "SAS"
+#   }
+
+#   data_volumes {
+#     size       = 20
+#     volumetype = "SAS"
+#   }
+# }

@@ -2,3 +2,4 @@
 /sber_cloud/variables.tf
 /sber_cloud/.terraform/
 /sber_cloud/.terraform.lock.hcl
+/sber_cloud/private_key.pem
